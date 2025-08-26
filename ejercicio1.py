@@ -40,3 +40,4 @@ elif IMC < 40:
 else:
     mensaje = "obesidad estrema"
 print(f"paciente {nombre}, tiene un IMC de {IMC:0.2f} y su condicion es {mensaje}.")
+ 
