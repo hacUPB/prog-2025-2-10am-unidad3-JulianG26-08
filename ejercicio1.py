@@ -27,6 +27,16 @@ else:
                 print("tiene obesidad extrema")
                 
 
+#otra forma de realizar 
 
-
-
+if IMC < 18:
+    mensaje = " bajo peso "
+elif IMC < 25:
+    mensaje = "peso normal"
+elif IMC < 35:
+    mensaje = "obesidad I"
+elif IMC < 40:
+    mensaje = "obesidad II"
+else:
+    mensaje = "obesidad estrema"
+print(f"paciente {nombre}, tiene un IMC de {IMC:0.2f} y su condicion es {mensaje}.")
