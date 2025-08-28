@@ -13,4 +13,4 @@ match opcion:
     case 3:
         print("Saliendo del programa...")
     case _:
-        print("Opción inválida.")
+        print("Opción inválida.") 
