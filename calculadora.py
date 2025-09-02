@@ -6,6 +6,7 @@ while control == True:
     
     print("S. sumar\n R. restar\n M. multiplicar\n D. dividir\n E. salir")
     opcion = input("elija una opcion: ")
+    opcion = opcion.upper()
 
     match opcion:
         case 'S':
@@ -25,3 +26,4 @@ while control == True:
         
     print(f"resultado = {resultado}")
     
+ 
