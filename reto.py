@@ -29,3 +29,5 @@ respecto a esto necesitamos que despues del despegue analizar constatntemente ca
 si la temperatura marca un nivel distinto al momento de ejecutar la accion debe mostrar una alerta en cabina respecto a la situacion, y necesitamos 
 que este estable 5 minutas antes del aterrizaje. en el intervalo de tiempo despues del aterrizaje hasta 5 min antes de aterrizar, la temperatura 
 de las ruedas este oscilando entre frio o caliente 
+
+
