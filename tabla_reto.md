@@ -1,8 +1,9 @@
 ## 1 problema 
 | Nombre de la variable | Tipo de dato |    Tipo de variable |   Descripción  |
-|---------------------  |-------------|-------------------|-----------------|
-|   T_min               |Real         |Entrada            |   Límite inferior permitido de temperatura.|
-|T_max                  |Real         |Entrada            |   Límite superior permitido de temperatura.|
+|-------------------  |-------------|-------------------|-----------------|
+|T_inicial              |Real         |Entrada            |Temperatura inicial de la llanta al despegar |
+|T_min                  |Real         |constante          |   Límite inferior permitido de temperatura.|
+|T_max                  |Real         |constante           |   Límite superior permitido de temperatura.|
 |tiempo_vuelo           |Entero       |Entrada            |Duración total del vuelo.|
 |T_actual               |Real         |Control            |Temperatura actual de una llanta en un momento dado.|
 |tiempo_actual          |Entero       |Control            |Tiempo transcurrido desde el despegue.|
