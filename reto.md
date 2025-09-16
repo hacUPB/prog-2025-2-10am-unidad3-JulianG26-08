@@ -112,5 +112,67 @@ En este caso debemos calcular constantemente una regulación del aire y de presi
 y pueda resitir la presión exterior.
 para el bucle tenemos varias etapas en las que debe realizar la medicion de la presion en cabina mas que todo cuando surgen cambios en altura, como despegue, aterrizaje y en vuelo.
 
+## pseudocodigo
+´´´
+Inicio
+Leer altitud, presion_exterior            
 
 
+presion_cabina_actual = presion_exterior
+
+Mostrar (" Presión de cabina igualada a la presión exterior.")
+factor_de_ajuste = 0.0004
+presion_maxima = 11.10 
+presion_minima = 10.9
+Mientras altitud > 0 HACER :
+
+    Leer altitud, presion_exterior
+
+    si  altitud <= 10000              
+        presion_objetivo = presion_exterior + (altitud * factor_de_ajuste)
+        presion_cabina_actual = presion_objetivo
+        mensaje = "Ajustando presión de cabina."
+
+    si no 
+        si altitud > 10000 Y altitud <= 12000
+            mostrar (" presión de cabina estable.")
+            presion_objetivo = 11.6
+            presion_cabina_actual = presion_objetivo
+            mensaje = "Manteniendo presión de cabina."
+        si no
+            presion_objetivo = presion_exterior - (altitud * factor_de_ajuste)
+            presion_cabina_actual = presion_objetivo
+            mensaje = "Ajustando presión de cabina."
+        fin si
+    fin si
+    si presion_cabina_actual > presion_maxima
+
+        presion_cabina_actual = presion_cabina_actual - 0.3
+
+        mensaje = "Exceso de presión"
+
+    si no
+        si presion_cabina_actual < presion_minima
+
+        presion_cabina_actual = presion_cabina_actual + 0.3
+
+        mensaje = " Baja presión"
+
+        si no
+        mensaje = "Presión de cabina óptima."
+        fin si 
+    fin si  
+     si altitud = 0
+
+        si presion_cabina_actual != presion_exterior
+
+        presion_cabina_actual = presion_exterior
+
+        mensaje = " avion en tierra"
+        si no :
+        mensaje = "avion en vuelo"
+        fin si 
+    fin si 
+    Mostrar (mensaje)
+Fin mientras
+Fin
