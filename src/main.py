@@ -17,7 +17,7 @@ tabla (77)
 fibonacci (79)
 
 '''
-from mod_funciones2 import *1
+from modulos.mod_funciones2 import *
 def main():
     while True:
         opcion = menu()
