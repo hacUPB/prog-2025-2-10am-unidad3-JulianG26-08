@@ -23,10 +23,9 @@ debido a que si el tren de aterrizaje esta muy frio, no puede recibir una temper
 regulado, debido a que se puede dañar el caucho de las ruedas del tren de aterrizaje, en caso de que se escoja una temperatura ideal que lo dañe, mostrar un error y el piloto debera escoger otra temperatura ideal
 que este estable 10 minutas antes del aterrizaje. en el intervalo de tiempo despues del aterrizaje hasta 5 min antes de aterrizar, la temperatura
 de las ruedas este oscilando entre frio o caliente
-### pseudocodigo
+finalizar 10 min antes del aterrizaje, cuando ya la tempoeratura de las ruedas esten estables.
 
-
-
+## pseudocodigo
 ´´´  
 Inicio  
 leer Te_inicial,tiempo_vuelo       
@@ -38,18 +37,22 @@ tiempo_estabilizacion = 5 "minutos"
 Te_actual = Te_inicial        
 intervalo_2 = 2 "minutos"   
 mostrar ("1. Boeing 747-8 (k = 5)\n2. Airbus A380-800 (k = 8)\n3. Antonov An-225(k = 10)")
-opcion avion :
-    caso 1. avion 1:
+leer opcion :
+    si opcion 1. avion 1:
     |   Imprimir "1. Boeing 747-8 (k = 5)"
     |   k = 5
-    caso 2. avion 2:
+    fin si
+    si opcion 2. avion 2:
     |   Imprimir "2. Airbus A380-800 (k = 8)"
-    |   k = 8       
-    caso 3. avion 3:
+    |   k = 8
+    fin si
+    si opcion 3. avion 3:
     |   Imprimir "3. Antonov An-225(k = 10)"
     |   k = 10
-    caso 4. avion no es valido :
+    fin si 
+    si opcion 4. avion no es valido :
     |   Imprimir "Opción no válida"
+    fin si 
 fin opcion
 
 tiempo_inicio_estabilizacion = tiempo_vuelo - tiempo_estabilizacion 
@@ -57,11 +60,10 @@ tiempo_actual = 0
 Mientras  tiempo_actual < tiempo_inicio_estabilizacion
     
     tiempo_actual = tiempo_actual + intervalo_1
-
+   
     dT_dt = -k * (Te_actual - Te)
-    
-    
     Te_nueva = Te_actual + (dT_dt * intervalo_1)
+   
     Te_actual = Te_nueva
     
     SI tiempo_actual < tiempo_inicio_estabilizacion ENTONCES   "hecho IA"
@@ -84,17 +86,20 @@ Mientras  tiempo_actual < tiempo_inicio_estabilizacion
         mostrar (" cuidado temperarura muy caliente ")
         Te_actual = Te_actual - (dT_dt * intervalo_2)
     fin si
-meter for para mostar el archivo de las temperaturas del vuelo
-
+    si tiempo_actual >= tiempo_inicio_estabilizacion :
+        mostrar ("Fase de estabilizacion, Asegurar temperatura estable para el aterrizaje.")
+    si no :
+        mostrar ("no iniciar fase de estabilizacion, seguir monitoreando")
+    fin si
+    mostrar te_actual
+        imprimir ("temperatura actual")
 FIN MIENTRAS
 
-si tiempo_actual >= tiempo_inicio_estabilizacion :
-    mostrar ("Fase de estabilizacion, Asegurar temperatura estable para el aterrizaje.")
-si no :
-    mostrar ("no iniciar fase de estabilizacion, seguir monitoreando")
 
 FIN
 ´´´´
+
+
 
 ##2 como segudo caso tenemos la presion dentro de cabina  que varia dependiendo la altitud
 
