@@ -113,18 +113,18 @@ y pueda resitir la presión exterior.
 para el bucle tenemos varias etapas en las que debe realizar la medicion de la presion en cabina mas que todo cuando surgen cambios en altura, como despegue, aterrizaje y en vuelo.
 
 ## pseudocodigo
-´´´
-Inicio
-Leer altitud, presion_exterior            
+´´´  
+ Inicio
+ Leer altitud, presion_exterior            
 
 
-presion_cabina_actual = presion_exterior
+ presion_cabina_actual = presion_exterior
 
-Mostrar (" Presión de cabina igualada a la presión exterior.")
-factor_de_ajuste = 0.0004
-presion_maxima = 11.10 
-presion_minima = 10.9
-Mientras altitud > 0 HACER :
+ Mostrar (" Presión de cabina igualada a la presión exterior.")
+ factor_de_ajuste = 0.0004
+ presion_maxima = 11.10 
+ presion_minima = 10.9
+ Mientras altitud > 0 HACER :
 
     Leer altitud, presion_exterior
 
@@ -176,3 +176,6 @@ Mientras altitud > 0 HACER :
     Mostrar (mensaje)
 Fin mientras
 Fin
+
+´´´
+![imagen pseudocodigo](imagenes/imagen2.jpeg)
