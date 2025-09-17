@@ -106,9 +106,9 @@ FIN
 En tierra La cabina está igualada con la presión exterior.
 Durante el ascenso La presión en cabina empieza a disminuir, pero de forma más lenta que la exterior.
 En crucero entre 10.000 y 12.000 m de altura  La cabina suele mantenerse equivalente a estar entre 1.500 y 2.400 m
-de altitud aproximadamente 10.9 y 11.6 psi
+de altitud aproximadamente 14 y 18 psi
 Durante el descenso  La presión en cabina aumenta suavemente hasta igualar la exterior en el aterrizaje.
-En este caso debemos calcular constantemente una regulación del aire y de presión en cabuina para que la misma se mantenga presurizada
+En este caso debemos calcular constantemente una regulación del aire y de presión en cabuina para que la misma se mantenga presurizada teniendo en cuenta la altitud a la que se encuentra el avión dandole un control de 500 metros subiendo y 500 metros bajando.
 y pueda resitir la presión exterior.
 para el bucle tenemos varias etapas en las que debe realizar la medicion de la presion en cabina mas que todo cuando surgen cambios en altura, como despegue, aterrizaje y en vuelo.
 
@@ -122,8 +122,8 @@ para el bucle tenemos varias etapas en las que debe realizar la medicion de la p
 
  Mostrar (" Presión de cabina igualada a la presión exterior.")
  factor_de_ajuste = 0.0004
- presion_maxima = 11.10 
- presion_minima = 10.9
+ presion_maxima = 18
+ presion_minima = 14
  Mientras altitud > 0 HACER :
 
     Leer altitud, presion_exterior
@@ -179,3 +179,85 @@ Fin
 
 ´´´
 ![imagen pseudocodigo](imagenes/imagen2.jpeg)
+
+INICIO
+
+Constante Factor_de_ajuste = 0.0004
+Constante Presion_Maxima = 18
+Constante Presion_Minima = 14
+
+mostrar  "Ingrese la altitud inicial: "
+Leer altitud_inicial
+
+mostrar "Ingrese la altitud de crucero: "
+Leer altitud_crucero
+
+mostrar "Ingrese la presión exterior inicial: "
+Leer presion_exterior
+
+presion_cabina_actual ← presion_exterior
+mostrar "Simulación iniciada"
+mostrar "Presión de cabina inicial igualada a la presión exterior."
+
+altitud = altitud_inicial
+subiendo = VERDADERO
+
+Mientras verdadero hacer
+    si subiendo entonces
+        si altitud < altitud_crucero entonces
+            altitud = altitud + 500
+            si altitud > altitud_crucero entonces
+                altitud = altitud_crucero
+            fin si
+        sino
+            subiendo = FALSO
+        fin si
+    sino
+        si altitud > 0 entonces
+            altitud = altitud - 500
+            si altitud < 0 entonces
+                altitud = 0
+            fin si
+        sino
+            salir del ciclo
+        fin si
+    fin si
+
+    si altitud <= 10000 entonces
+        presion_objetivo = presion_exterior + (altitud * FACTOR_DE_AJUSTE)
+        mensaje = "Ajustando presión de cabina."
+    sino si altitud > 10000 y altitud <= 12000 entonces
+        presion_objetivo = 15
+        mensaje = "Manteniendo presión de cabina en crucero."
+    sino
+        presion_objetivo = presion_exterior - (altitud * FACTOR_DE_AJUSTE)
+        mensaje = "Ajustando presión de cabina."
+    fin si
+
+    presion_cabina_actual = presion_objetivo
+
+    si presion_cabina_actual > PRESION_MAXIMA entonces
+        presion_cabina_actual = presion_cabina_actual - 0.3
+        mensaje = mensaje + " Exceso de presión"
+    sino si presion_cabina_actual < PRESION_MINIMA entonces
+        presion_cabina_actual = presion_cabina_actual + 0.3
+        mensaje = mensaje + " Baja presión"
+    sino
+        mensaje = mensaje + " Presión de cabina óptima"
+    fin si
+
+    mostrar "Altitud:  {altitud}m , Presión Cabina: {presion_cabina_actual} psi , Estado: {mensaje}"
+
+fin mientras
+
+si presion_cabina_actual ≠ presion_exterior entonces
+    presion_cabina_actual = presion_exterior
+    mensaje = "Avión en tierra"
+sino
+    mensaje = "Avión en tierra."
+fin si
+
+mostrar "Aterrizaje completado"
+mostrar "Estado final: ", mensaje, ", Presión final: ", presion_cabina_actual, " psi"
+
+fin

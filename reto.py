@@ -1,52 +1,64 @@
 FACTOR_DE_AJUSTE = 0.0004
-PRESION_MAXIMA = 11.10
-PRESION_MINIMA = 10.9
+PRESION_MAXIMA = 18
+PRESION_MINIMA = 14
 
-altitud = float(input("Ingrese la altitud inicial "))
-presion_exterior = float(input("Ingrese la presión exterior inicial (en psi): "))
+altitud_inicial = float(input("Ingrese la altitud inicial: "))
+altitud_crucero = float(input("Ingrese la altitud de crucero : "))
+presion_exterior = float(input("Ingrese la presión exterior inicial: "))
 
-    
 presion_cabina_actual = presion_exterior
-print(" Simulación iniciada")
+print("Simulación iniciada")
 print("Presión de cabina inicial igualada a la presión exterior.")
 
-        
-while altitud > 0:
-    mensaje = ""
-            
-            
+altitud = altitud_inicial
+subiendo = True
+
+while True:
+    if subiendo:
+        if altitud < altitud_crucero:
+            altitud += 500
+            if altitud > altitud_crucero:
+                altitud = altitud_crucero
+        else:
+            subiendo = False
+  
+    else:
+        if altitud > 0:
+            altitud -= 500
+            if altitud < 0:
+                altitud = 0
+        else:
+            break  
+
     if altitud <= 10000:
         presion_objetivo = presion_exterior + (altitud * FACTOR_DE_AJUSTE)
-        presion_cabina_actual = presion_objetivo
-        mensaje = "Ajustando presión de cabina"
+        mensaje = "Ajustando presión de cabina."
     elif 10000 < altitud <= 12000:
-        print(" presión estable.")
-        presion_objetivo = 11.6 
-        presion_cabina_actual = presion_objetivo
+        presion_objetivo = 15
         mensaje = "Manteniendo presión de cabina en crucero."
     else:
         presion_objetivo = presion_exterior - (altitud * FACTOR_DE_AJUSTE)
-        presion_cabina_actual = presion_objetivo
         mensaje = "Ajustando presión de cabina."
+
+    presion_cabina_actual = presion_objetivo
 
     if presion_cabina_actual > PRESION_MAXIMA:
         presion_cabina_actual -= 0.3
-        mensaje = " Exceso de presión"
+        mensaje += " Exceso de presión"
     elif presion_cabina_actual < PRESION_MINIMA:
         presion_cabina_actual += 0.3
-        mensaje = "Baja presión"
+        mensaje += " Baja presión"
     else:
-        mensaje = "Presión de cabina óptima."
-            
-        print(f"Altitud: {altitud}m , Presión Cabina: {presion_cabina_actual} psi")
-        print(f"Estado: {mensaje}")
+        mensaje += "Presión de cabina óptima"
 
-    if altitud == 0:
-        if presion_cabina_actual != presion_exterior:
-            presion_cabina_actual = presion_exterior
-            mensaje = "Avión en tierra"
-        else:
-            mensaje = "Avión en vuelo"
-            
-print(f"Aterrizaje completado")
-print(f"Estado final: {mensaje}, Presión final: {presion_cabina_actual} psi")
+    print(f"Altitud: {altitud:.1f} m , Presión Cabina: {presion_cabina_actual:.2f} psi , Estado: {mensaje}")
+
+
+if presion_cabina_actual != presion_exterior:
+    presion_cabina_actual = presion_exterior
+    mensaje = "Avión en tierra"
+else:
+    mensaje = "Avión en tierra."
+
+print("\nAterrizaje completado")
+print(f"Estado final: {mensaje}, Presión final: {presion_cabina_actual:.2f} psi")
