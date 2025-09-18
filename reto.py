@@ -1,6 +1,6 @@
-FACTOR_DE_AJUSTE = 0.0004
-PRESION_MAXIMA = 18
-PRESION_MINIMA = 14
+Factor_de_ajuste = 0.0004
+Presion_maxima = 18
+Presion_minima = 14
 
 altitud_inicial = float(input("Ingrese la altitud inicial: "))
 altitud_crucero = float(input("Ingrese la altitud de crucero : "))
@@ -31,21 +31,21 @@ while True:
             break  
 
     if altitud <= 10000:
-        presion_objetivo = presion_exterior + (altitud * FACTOR_DE_AJUSTE)
+        presion_objetivo = presion_exterior + (altitud * Factor_de_ajuste)
         mensaje = "Ajustando presión de cabina."
     elif 10000 < altitud <= 12000:
         presion_objetivo = 15
         mensaje = "Manteniendo presión de cabina en crucero."
     else:
-        presion_objetivo = presion_exterior - (altitud * FACTOR_DE_AJUSTE)
+        presion_objetivo = presion_exterior - (altitud * Factor_de_ajuste)
         mensaje = "Ajustando presión de cabina."
 
     presion_cabina_actual = presion_objetivo
 
-    if presion_cabina_actual > PRESION_MAXIMA:
+    if presion_cabina_actual > Presion_maxima:
         presion_cabina_actual -= 0.3
         mensaje += " Exceso de presión"
-    elif presion_cabina_actual < PRESION_MINIMA:
+    elif presion_cabina_actual < Presion_minima:
         presion_cabina_actual += 0.3
         mensaje += " Baja presión"
     else:

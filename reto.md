@@ -78,13 +78,13 @@ Mientras  tiempo_actual < tiempo_inicio_estabilizacion
         mostrar (" la temperatura del lg es menor que la temperatura maxima, verificar si es menor que la minima")
         si Te_min > Te_actual :
             mostrar ("cuidado temperatura muy fria")
-            Te_actual = Te_actual + (dT_dt * intervalo_2)
+            Te_actual = Te_actual + (dT_dt )* (intervalo_2 / 60)
             si no :
                 mostrar (" temperatura en rango ideal")
         fin si
     si no : 
         mostrar (" cuidado temperarura muy caliente ")
-        Te_actual = Te_actual - (dT_dt * intervalo_2)
+        Te_actual = Te_actual - (dT_dt) * (intervalo_2 / 60)
     fin si
     si tiempo_actual >= tiempo_inicio_estabilizacion :
         mostrar ("Fase de estabilizacion, Asegurar temperatura estable para el aterrizaje.")
@@ -113,78 +113,12 @@ y pueda resitir la presión exterior.
 para el bucle tenemos varias etapas en las que debe realizar la medicion de la presion en cabina mas que todo cuando surgen cambios en altura, como despegue, aterrizaje y en vuelo.
 
 ## pseudocodigo
-´´´  
- Inicio
- Leer altitud, presion_exterior            
+´´
+Inicio
 
-
- presion_cabina_actual = presion_exterior
-
- Mostrar (" Presión de cabina igualada a la presión exterior.")
- factor_de_ajuste = 0.0004
- presion_maxima = 18
- presion_minima = 14
- Mientras altitud > 0 HACER :
-
-    Leer altitud, presion_exterior
-
-    si  altitud <= 10000              
-        presion_objetivo = presion_exterior + (altitud * factor_de_ajuste)
-        presion_cabina_actual = presion_objetivo
-        mensaje = "Ajustando presión de cabina."
-
-    si no 
-        si altitud > 10000 Y altitud <= 12000
-            mostrar (" presión de cabina estable.")
-            presion_objetivo = 11.6
-            presion_cabina_actual = presion_objetivo
-            mensaje = "Manteniendo presión de cabina."
-        si no
-            presion_objetivo = presion_exterior - (altitud * factor_de_ajuste)
-            presion_cabina_actual = presion_objetivo
-            mensaje = "Ajustando presión de cabina."
-        fin si
-    fin si
-    si presion_cabina_actual > presion_maxima
-
-        presion_cabina_actual = presion_cabina_actual - 0.3
-
-        mensaje = "Exceso de presión"
-
-    si no
-        si presion_cabina_actual < presion_minima
-
-        presion_cabina_actual = presion_cabina_actual + 0.3
-
-        mensaje = " Baja presión"
-
-        si no
-        mensaje = "Presión de cabina óptima."
-        fin si 
-    fin si  
-     si altitud = 0
-
-        si presion_cabina_actual != presion_exterior
-
-        presion_cabina_actual = presion_exterior
-
-        mensaje = " avion en tierra"
-        si no :
-        mensaje = "avion en vuelo"
-        fin si 
-    fin si 
-    Mostrar (mensaje)
-Fin mientras
-Fin
-
-´´´
-![imagen pseudocodigo](imagenes/imagen2.jpeg)
-
-INICIO
-
-Constante Factor_de_ajuste = 0.0004
-Constante Presion_Maxima = 18
-Constante Presion_Minima = 14
+Factor_de_ajuste = 0.0004  
+Presion_Maxima = 18
+Presion_Minima = 14
 
 mostrar  "Ingrese la altitud inicial: "
 Leer altitud_inicial
@@ -258,6 +192,7 @@ sino
 fin si
 
 mostrar "Aterrizaje completado"
-mostrar "Estado final: ", mensaje, ", Presión final: ", presion_cabina_actual, " psi"
+mostrar "Estado final: ", {mensaje}, " Presión final: ", {presion_cabina_actual}, " psi"
 
 fin
+´´´´
