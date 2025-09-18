@@ -58,6 +58,7 @@ fin opcion
 tiempo_inicio_estabilizacion = tiempo_vuelo - tiempo_estabilizacion 
 tiempo_actual = 0
 Mientras  tiempo_actual < tiempo_inicio_estabilizacion
+
     
     tiempo_actual = tiempo_actual + intervalo_1
    
@@ -79,8 +80,8 @@ Mientras  tiempo_actual < tiempo_inicio_estabilizacion
         si Te_min > Te_actual :
             mostrar ("cuidado temperatura muy fria")
             Te_actual = Te_actual + (dT_dt )* (intervalo_2 / 60)
-            si no :
-                mostrar (" temperatura en rango ideal")
+        si no :
+            mostrar (" temperatura en rango ideal")
         fin si
     si no : 
         mostrar (" cuidado temperarura muy caliente ")
