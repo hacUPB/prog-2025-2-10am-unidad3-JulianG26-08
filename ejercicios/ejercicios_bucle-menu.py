@@ -37,7 +37,7 @@ while opcion != 'Q':
     else:
         print("saliendo del programa")
 '''
-    
+'''
 numero = int(input("ingrese un numero entero mayor que 1: "))
 cont = 0
 for i in range(1,numero + 1):
@@ -50,3 +50,5 @@ else:
     for i in range(1, numero + 1):
         if numero % i == 0:
             print(i)
+'''
+
